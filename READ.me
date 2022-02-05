@@ -1,0 +1,10 @@
+source .venv/bin/activate
+pip install -r requirements.txt
+sudo service redis-server start
+celery -A  fakejira worker -l info
+
+# Open second tab and don't close celery tab
+python manage.py shell
+    from base.tasks import add
+    add.delay(12,13)
+Open celery tab and see the result
